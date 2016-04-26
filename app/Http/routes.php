@@ -10,11 +10,19 @@
 | and give it the controller to call when that URI is requested.
 |
 */
+Route::auth();
 
 Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/about', 'Pagescontroller@about');
+Route::get('about', 'Pagescontroller@about');
 
 Route::get('/contact', 'Pagescontroller@contact');
+
+Route::get('home', ['as' => 'home', 'uses' => function() {
+	return view('home');
+}]);
+
+Route::get('social/login/redirect/{provider}', ['uses' => 'Auth\AuthController@redirectToProvider', 'as' => 'social.login']);
+Route::get('social/login/{provider}', 'Auth\AuthController@handleProviderCallback');

@@ -1,52 +1,33 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Vo Tien Thieu</title>
-	
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+         
+    <link href="{{ asset('public/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/main.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet">
 
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato';
-            }
-
-            .container {
-                text-align: center;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 96px;
-            }
-
-            header{
-                background-color: grey;
-                text-align: center;
-            }
-            footer{
-                background-color: grey;
-                text-align: center;
-                bottom: 0;
-            }
-        </style>
 </head>
 <body>
-<header>Header</header>
-	@yield('content')
-<footer>footer &copy; by me</footer>
+    
+    @include('templates.header')
+
+    <section>
+	    @yield('content')
+    </section>
+
+    @include('templates.footer')
+
+    <script src="{{ asset('public/js/jquery.min.js') }}"></script>
+    <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('public/js/wow.min.js') }}"></script>
+    
 </body>
 </html>

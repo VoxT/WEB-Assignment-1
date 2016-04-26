@@ -24,13 +24,6 @@ class User extends Authenticatable
         'password', 'remember_token',
     ];
     /**
-     * The table associated with the model.
-     *
-     * @var string
-     */
-    protected $table = 'user';
-    protected $primaryKey = 'idUser';
-    /**
      * Indicates if the model should be timestamped.
      *
      * @var bool

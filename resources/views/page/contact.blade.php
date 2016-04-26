@@ -2,7 +2,6 @@
  
 @section('content')
 
-<section>
 <div class="container">
     <div class="content">
         <div class="title">
@@ -13,6 +12,5 @@
         </div>
     </div>
 </div>
-</section>
 
 @stop

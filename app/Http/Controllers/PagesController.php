@@ -19,4 +19,5 @@ class PagesController extends Controller
     	$allUser = $user->selectAll();
     	return view('page.contact')->with('admin', $allUser);
     }
+   
 }
