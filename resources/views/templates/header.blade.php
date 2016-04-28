@@ -3,7 +3,7 @@
             <div class="container">
                 <div class="row">
                     <div class="col-sm-3 col-xs-12">
-                        <div class="logo_company"><img class="img-responsive" src="public/images/logo.png" alt="logo"></div>
+                        <div class="logo_company"><a href="{{ url('home') }}"><img class="img-responsive" src="public/images/logo.png" alt="logo"></a></div>
                     </div>
                     <div class="col-sm-6 col-xs-12">
                         <div class="row">
@@ -70,7 +70,7 @@
                 </div>
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active"><a href="#">Trang Chủ</a></li>
+                        <li class="active"><a href="{{ url('home') }}">Trang Chủ</a></li>
                         <li><a href="#follow">Sản Phẩm Hot</a></li>
                         <li><a href="#contact">Trả Góp</a></li>
                         <li><a href="#follow">Khuyến Mãi</a></li>

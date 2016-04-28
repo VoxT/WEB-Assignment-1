@@ -158,7 +158,7 @@ return [
 
         Way\Generators\GeneratorsServiceProvider::class,
         Xethron\MigrationsGenerator\MigrationsGeneratorServiceProvider::class,
-        //'Darryldecode\Cart\CartServiceProvider',
+        'Darryldecode\Cart\CartServiceProvider',
         Laravel\Socialite\SocialiteServiceProvider::class
 
     ],
@@ -206,7 +206,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-       // 'Cart' => 'Darryldecode\Cart\Facades\CartFacade',
+        'Cart' => 'Darryldecode\Cart\Facades\CartFacade',
         'Socialite' => Laravel\Socialite\Facades\Socialite::class
 
     ],

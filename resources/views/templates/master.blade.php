@@ -11,6 +11,7 @@
     <link href="{{ asset('public/css/font-awesome.min.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/animate.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('public/css/price-range.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('public/css/responsive.css') }}" rel="stylesheet">
 
@@ -20,7 +21,9 @@
     @include('templates.header')
 
     <section>
+
 	    @yield('content')
+        <a id="scrollUp" href="#top" style="position: fixed; z-index: 2147483647; display: block;"><i class="fa fa-angle-up"></i></a>
     </section>
 
     @include('templates.footer')
@@ -28,6 +31,7 @@
     <script src="{{ asset('public/js/jquery.min.js') }}"></script>
     <script src="{{ asset('public/js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('public/js/wow.min.js') }}"></script>
+    <script src="{{ asset('public/js/price-range.js') }}"></script>
     
 </body>
 </html>
