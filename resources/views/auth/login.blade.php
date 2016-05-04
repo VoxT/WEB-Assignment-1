@@ -31,7 +31,7 @@
                                     </span>
                                 @endif
 
-                                <span class="help-block"><a href="https://www.aceandtate.com/customer/account/forgotpassword">Quên Mật Khẩu?</a></span>
+                                <span class="help-block"><a href="#">Quên Mật Khẩu?</a></span>
                             </div>
 
 							<span>

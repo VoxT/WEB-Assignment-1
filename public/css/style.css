@@ -4,61 +4,6 @@
   background: none repeat scroll 0 0 #40403E;
 }
 
-.contactinfo ul li a{
-  font-size: 12px;
-  color: #ccc;
-  font-family: 'Roboto', sans-serif;
-}
-
-
-.contactinfo ul li a:hover{
-  background:inherit;
-}
-
-.social-icons ul li a {
-  border: 0 none;
-  border-radius: 0;
-  color: #ccc;
-  padding:0px;
-}
-
-.social-icons ul{
-  margin-left: -30px;
-}
-
-.social-icons ul li{
-  display:inline-block;
-}
-
-.social-icons ul li a i {
-  padding: 11px 15px;
-   transition: all 0.9s ease 0s;
-  -moz-transition: all 0.9s ease 0s;
-  -webkit-transition: all 0.9s ease 0s;
-  -o-transition: all 0.9s ease 0s;
-}
-
-.social-icons ul li a i:hover{
-  color: #fff;
-   transition: all 0.9s ease 0s;
-  -moz-transition: all 0.9s ease 0s;
-  -webkit-transition: all 0.9s ease 0s;
-  -o-transition: all 0.9s ease 0s;
-}
-
-.social-icons .fa-facebook:hover {
-  background: #3a5795;
-}
-
-.social-icons .fa-twitter:hover  {
-  background:#5BBCEC;
-}
-
-
-.social-icons .fa-google-plus:hover  {
-  background:#CE3C2D;
-}
-
 .header_middle{
   height: 100px;
 }
@@ -112,54 +57,6 @@
 .navbar-nav li a{
   padding-left: 30px;
   padding-right: 30px;
-}
-
-#slider{
-  margin: 50px;
-  height: 400px;
-}
-
-.control-carousel {
-  position: absolute;
-  top: 50%;
-  font-size: 30px;
-  color: #C2C2C1;
-}
-
-.control-carousel:hover{
-  color: #01BAED ;
-}
-
-.right {
-  right: 0;
-}
-
-.carousel .item img{
-    margin: 0 auto; /* Align slide image horizontally center */
-}
-
-
-.item h2 {
-  color:#01BAED;
-  margin-bottom: 22px;
-  margin-top: 150px;
-}
-
-.item button{
-  background-color: #01BAED;
-  margin-top: 23px;
-}
-
-.carousel-indicators li {
-  background: #C4C4BE;
-}
-
-.carousel-indicators li.active {
-    background: #01BAED;
-}
-
-.item {
-  padding-left: 100px;
 }
 
 .thumbnail {
@@ -572,4 +469,50 @@ a {
     height: 100px !important;
     display: table;  
     text-align: center;
+}
+
+#myCarousel .item img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.carousel-control.left, .carousel-control.right {
+    background-image: none
+}
+
+.btn-proceed-order {
+    background-color: #3A5C83;
+    color: white;
+    padding-top: 16px;
+    border-radius: 0px;
+    height: 70px;
+    text-align: center;
+    vertical-align: center;
+    font-size: 28px;
+}
+
+.btn-proceed-order:hover {
+    background-color: #3A5C83;
+    color: white;
+    border-radius: 0px;
+    height: 70px;
+    text-align: center;
+    vertical-align: center;
+    font-size: 28px;
+    transform: scale(0.95);
+}
+
+.tragop {
+  background-color: orange;
+}
+
+.tragop:hover{
+  background-color: orange;
+    transform: scale(0.95);
+}
+
+.carousel-inner .item img {
+  height: 405px;
+  width: 100%;
+  object-fit: cover;
 }

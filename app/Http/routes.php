@@ -16,6 +16,18 @@ Route::get('/', function () {
     return redirect('home');
 });
 
+Route::get('userinfo', 'Pagescontroller@userInfo');
+
+Route::get('order/pid={productId}', 'OrderController@showOrderForm');
+
+Route::post('order/pid={productId}', 'OrderController@order');
+
+Route::get('product/band={categoryId}', 'Pagescontroller@showProductsByBand');
+
+Route::get('product-{categoryId}', 'Pagescontroller@showCategoryProducts');
+
+Route::get('product/{productId}', 'Pagescontroller@productInfo');
+
 Route::get('about', 'Pagescontroller@about');
 
 Route::get('/contact', 'Pagescontroller@contact');

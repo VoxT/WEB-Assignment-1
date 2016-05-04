@@ -12,6 +12,12 @@ use App\Repository\ProductRepository as Products;
 
 use App\Product;
 
+use App\Category;
+
+use App\Order;
+
+use Auth;
+
 class PagesController extends Controller
 {
 
@@ -21,6 +27,8 @@ class PagesController extends Controller
      * @var ProductRepository
      */
     protected $products;
+    protected $category;
+    protected $order;
 
     /**
      * Create a new controller instance.
@@ -28,9 +36,11 @@ class PagesController extends Controller
      * @param  ProductRepository  $products
      * @return void
      */
-    public function __construct(Products $products)
+    public function __construct(Products $products, Category $category, Order $order)
     {
         $this->products = $products;
+        $this->category = $category;
+        $this->order = $order;
     }
 
   /**
@@ -52,14 +62,17 @@ class PagesController extends Controller
      */
      public function showAllProducts(){
        return view('page.home', [
-         'products' => $this->products->getAllProducts()
+         'products' => $this->products->getAllProducts(), 
+         'category' => $this->category->getAllCategory(),
+         'title' => 'Sản Phẩm Mới'
        ]);
      }
 
 
-	public function about() {
-		return view('page/about');
-	}
+  	public function about() {
+  		return view('page/about');
+  	}
+
     public function contact() {
     	$user = new Admin;
     	//$user->insert('votienthieu@gmail.com', '123456', 'Vo Tien Thieu');
@@ -67,4 +80,33 @@ class PagesController extends Controller
     	return view('page.contact')->with('admin', $allUser);
     }
    
+   public function productInfo($productId) {
+
+      return view('page.productInfo', [
+            'product' => $this->products->getProductBy($productId)
+        ]);
+   }
+
+   public function showCategoryProducts($categoryId){
+      return view('page.home', [
+          'products' => $this->products->getProductByCategory($categoryId), 
+          'category' => $this->category->getAllCategory(),
+          'title' => $this->category->getCategoryNameById($categoryId)
+        ]);
+   }
+
+   public function showProductsByBand($categoryId){
+      return view('page.band', [
+          'band' => $this->category->getSubCategoryById($categoryId), 
+          'category' => $this->category->getAllCategory(),
+          'title' => $this->category->getCategoryNameById($categoryId)
+        ]);
+   }
+
+   public function userInfo(){
+      return view('page.userInfo', [
+          'user' => Auth::user(), 
+          'orders' => $this->order->getOrderByUser(Auth::user()->id)
+        ]);
+   }
 }
