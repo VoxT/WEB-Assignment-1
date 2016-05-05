@@ -43,11 +43,17 @@
 				<div class="row">
 					<div class="col-sm-12">
 						<h1>{{ $product->ten }}</h1>
+						@if($product->giamGia > 0)
+						<h3 style="color: red; display: inline;"> Giá: 
+							<span style="color: blue; text-decoration: line-through;"> {{ $product->gia }}</span> <span> {{ substr_replace(
+							substr_replace( strval(intval($product->gia*1000000) - intval($product->gia*1000000)*$product->giamGia/100), '.', -3,0), '.', -7, 0) }}</span></h3>
+						@else
 						<h3 style="color: red;">Giá: {{ $product->gia }}</h3>
+						@endif
 						<fieldset>
 							<legend>Khuyến mãi</legend>
 							<ul>
-								<li> {{ $product->khuyenMai }} </li>
+								<li> {{ $product->khuyenMai }}</li>
 							</ul>
 						</fieldset>
 						<fieldset>

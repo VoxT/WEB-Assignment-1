@@ -27,6 +27,13 @@
 												<a href="{{ url('product/'.$product->idDienThoai) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
 											</div>
 										</div>
+										@if($product->giamGia > 0)
+										<img src="{{ asset('public/images/sale.png') }}" class="new" alt="">
+										@else
+										@if( (strtotime($product->ngayTao) - strtotime(time())) > strtotime('24 hours ago') )
+										<img src="{{ asset('public/images/new.png') }}" class="new" alt="">
+										@endif
+										@endif
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">

@@ -8,7 +8,7 @@ class ProductRepository{
 
   public function getAllProducts(){
 
-    return Product::orderBy('idDienThoai')->take('20')
+    return Product::orderBy('ngayTao', 'DESC')->orderBy('giamGia', 'DESC')->take('20')
                                  ->get();
   }
 

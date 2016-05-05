@@ -1491,11 +1491,15 @@ h2.title {
   margin-right: 5px;
 }
 
-.login-form form button {
+.login-form form button, .info-form  button {
   margin-top: 23px;
 }
 
-.login-form form button, .signup-form form button {
+.info-form  button {
+  margin-top: 15px;
+}
+
+.login-form form button, .signup-form form button, .info-form  button {
   background: #3A5C83;
   border: medium none;
   border-radius: 0;
@@ -1548,7 +1552,7 @@ h2.title {
 
 .breadcrumbs .breadcrumb {
   background:transparent;
-  margin-bottom: 75px;
+  margin-bottom: -25px;
   padding-left: 0;
 }
 
@@ -2582,3 +2586,4 @@ h2.title {
 .logo{
 	font-size: 23px;
 }
+

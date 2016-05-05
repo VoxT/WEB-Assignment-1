@@ -16,6 +16,14 @@ Route::get('/', function () {
     return redirect('home');
 });
 
+Route::get('viewOrder-{orderId}', 'OrderController@viewOrder');
+
+Route::post('userinfo/deleteOrder', 'OrderController@deleteOrder');
+
+Route::post('userinfo/password', 'UserController@updatePassword');
+
+Route::post('userinfo/', 'UserController@updateInfo');
+
 Route::get('userinfo', 'Pagescontroller@userInfo');
 
 Route::get('order/pid={productId}', 'OrderController@showOrderForm');

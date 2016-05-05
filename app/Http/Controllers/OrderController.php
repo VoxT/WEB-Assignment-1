@@ -18,8 +18,8 @@ use App\Order;
 
 class OrderController extends Controller
 {
-	protected $products;
-	protected $orders;
+    protected $products;
+    protected $orders;
 
     /**
      * Create a new controller instance.
@@ -29,8 +29,8 @@ class OrderController extends Controller
      */
     public function __construct(Products $products, Order $orders)
     {
-    	$this->products = $products;
-    	$this->orders = $orders;
+        $this->products = $products;
+        $this->orders = $orders;
 
     }
 
@@ -45,27 +45,37 @@ class OrderController extends Controller
     }
 
     public function showOrderForm($productId){
-    	return view('page.order', [
-    			'product' => $this->products->getProductBy($productId),
-    			'user' => Auth::user()
-    		]);
+        return view('page.order', [
+                'product' => $this->products->getProductBy($productId),
+                'user' => Auth::user()
+            ]);
     }
 
 
     public function order($productId, Request $request){
-    	$orderId = Order::insertGetId([
-    			'idUser' => $request->idUser,
-    			'tenNguoiMua' => $request->name,
-    			'sdtNguoiMua' => $request->number,
-    			'idDienThoai' => $request->idDienThoai,
-    			'diachi' => $request->diachi,
-    			'trangThaiThanhToan' => '0',
-    			'email' => $request->email
-    		]);
+        $orderId = Order::insertGetId([
+                'idUser' => $request->idUser,
+                'tenNguoiMua' => $request->name,
+                'sdtNguoiMua' => $request->number,
+                'idDienThoai' => $request->idDienThoai,
+                'diachi' => $request->diachi,
+                'trangThaiThanhToan' => '0',
+                'email' => $request->email
+            ]);
 
-    		return view('page.viewOrder', [
-    				'product' => $this->products->getProductBy($productId),
-    				'order' => $request
-    			]);
+            return redirect('viewOrder-'.$orderId);
+    }
+
+    public function deleteOrder(Request $request){
+        Order::destroy($request->id);
+
+        return redirect('userinfo');
+    }
+
+    public function viewOrder($orderId){
+        return view('page.viewOrder', [
+                'product' => $this->orders->getOrderById($orderId)->getProduct,
+                'order' => $this->orders->getOrderById($orderId)
+            ]);
     }
 }

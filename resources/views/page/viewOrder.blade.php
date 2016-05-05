@@ -25,16 +25,22 @@
 						<p> Địa Chỉ Giao: {{$order->diachi }}</p>
 					</td>
 					<td class="cart_price">
-						<p>{{$product->gia}}</p>
+						@if($product->giamGia > 0)
+						<p class="cart_total_price">
+							<span style="text-decoration: line-through;"> {{ $product->gia }}</span> </p>
+						<p class="cart_total_price">
+						{{ substr_replace(
+							substr_replace( strval(intval($product->gia*1000000) - intval($product->gia*1000000)*$product->giamGia/100), '.', -3,0), '.', -7, 0) }}
+						</p>
+						@else
+						<p class="cart_total_price">{{$product->gia}}</p>
+						@endif
 					</td>
 					<td >
 						<p>{{$product->khuyenMai}}</p>
 					</td>
 					<td>
 						<p>Chưa Xác Nhận</p>
-					</td>
-					<td class="cart_del ete">
-						<a class="cart_quantity_delete" href=""><i class="fa fa-times"></i></a>
 					</td>
 				</tr>
 			</tbody>

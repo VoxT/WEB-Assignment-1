@@ -10,7 +10,13 @@
 	                        <img src="{{ asset($product->linkAnhDaiDien) }}" alt="{{$product->ten}}">
 	                        <h2>{{$product->ten}}</h2>
 	                    </a>
-                        <h4 style="color: red">Giá: {{$product->gia}}</h4>
+                        @if($product->giamGia > 0)
+						<h4 style="color: red; display: inline;"> Giá: 
+							<span style="color: blue; text-decoration: line-through;"> {{ $product->gia }}</span> <span> {{ substr_replace(
+							substr_replace( strval(intval($product->gia*1000000) - intval($product->gia*1000000)*$product->giamGia/100), '.', -3,0), '.', -7, 0) }}</span></h4>
+						@else
+						<h4 style="color: red;">Giá: {{ $product->gia }}</h4>
+						@endif
                         <h5>Quà Khuyến Mãi:</h5>
                         <p>{{$product->khuyenMai}}</p>
                     </div>
