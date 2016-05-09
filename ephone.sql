@@ -1,9 +1,9 @@
 -- phpMyAdmin SQL Dump
 -- version 4.3.11
--- http://www.phpmyusers.net
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: May 05, 2016 at 06:09 PM
+-- Generation Time: May 09, 2016 at 03:27 AM
 -- Server version: 5.6.24
 -- PHP Version: 5.6.8
 
@@ -20,15 +20,6 @@ SET time_zone = "+00:00";
 -- Database: `ephone`
 --
 
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
---
--- Dumping data for table `users`
---
 -- --------------------------------------------------------
 
 --
@@ -53,11 +44,19 @@ CREATE TABLE IF NOT EXISTS `binh_luan` (
   `idDienThoai` int(11) DEFAULT NULL,
   `idUser` int(11) NOT NULL,
   `idBaiViet` int(11) DEFAULT NULL,
-  `idBinhLuanCha` int(11) NOT NULL,
+  `idBinhLuanCha` int(11) DEFAULT NULL,
   `noiDung` text COLLATE utf8_unicode_ci NOT NULL,
-  `thoiGian` int(11) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  `thoiGian` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `id` int(11) DEFAULT NULL
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Dumping data for table `binh_luan`
+--
+
+INSERT INTO `binh_luan` (`idBinhLuan`, `idDienThoai`, `idUser`, `idBaiViet`, `idBinhLuanCha`, `noiDung`, `thoiGian`, `id`) VALUES
+(2, 2, 5, NULL, NULL, 'QTV cho mình hỏi, ra cửa hàng thegioididong có mua được với giá 21.7 không hay chỉ đặt qua mạng thôi vậy?', '2016-05-08 15:22:15', NULL),
+(3, 2, 1, NULL, 2, 'Chào Sơn,\r\nNếu bạn trực tiếp đến siêu thị Thegioididong.com thì vẫn được hỗ trợ giảm 3 triệu bạn nhé. Lưu ý: chương trình này chỉ áp dụng đến 15 giờ ngày 30 tháng 4 thôi bạn nhé.\r\nThông tin gửi đến bạn. \r\nChúc bạn ngủ ngon và có những giấc mơ đẹp!\r\n', '2016-05-08 15:23:02', NULL);
 
 -- --------------------------------------------------------
 
@@ -164,12 +163,12 @@ CREATE TABLE IF NOT EXISTS `giao_dich` (
 --
 
 INSERT INTO `giao_dich` (`idGiaoDich`, `idUser`, `tenNguoiMua`, `sdtNguoiMua`, `idDienThoai`, `diachi`, `trangThaiThanhToan`, `email`, `ngayTao`) VALUES
-(1, 1, 'Võ Tiến Thiều', '01692566179', 9, 'ktx bách khoa hồ chí minh', 2, 'votienthieu@gmail.com', '0000-00-00 00:00:00'),
+(1, 5, 'Võ Tiến Thiều', '01692566179', 9, 'ktx bách khoa hồ chí minh', 2, 'votienthieu@gmail.com', '2016-05-06 08:09:11'),
 (64, 1, 'Võ Tiến Thiều', '01692566179', 5, 'ktx bách khoa hồ chí minh', 0, 'votienthieu@gmail.com', '0000-00-00 00:00:00'),
-(66, 1, 'Võ Tiến Thiều', '01692566179', 4, 'ktx bách khoa hồ chí minh', 1, 'votienthieu@gmail.com', '2016-05-02 17:00:00'),
+(66, 5, 'Võ Tiến Thiều', '01692566179', 4, 'ktx bách khoa hồ chí minh', 1, 'votienthieu@gmail.com', '2016-05-06 08:08:59'),
 (76, 1, 'Võ Tiến Thiều', '01692566179', 3, '456 Hoà Hảo Quận 10', 0, 'votienthieu@gmail.com', '2016-05-02 17:00:00'),
 (77, 1, 'Võ Tiến Thiều', '01692566179', 11, '456 Hoà Hảo Quận 10', 0, 'votienthieu@gmail.com', '2016-05-03 17:00:00'),
-(79, 1, 'Võ Tiến Thiều', '01692566179', 3, 'KTX Bách Khoa Hồ Chí Minh, 497 Hoà Hảo, Quận 10', 0, 'votienthieu@gmail.com', '2016-05-04 18:29:34'),
+(79, 5, 'Võ Tiến Thiều', '01692566179', 3, 'KTX Bách Khoa Hồ Chí Minh, 497 Hoà Hảo, Quận 10', 0, 'votienthieu@gmail.com', '2016-05-06 08:08:48'),
 (81, 5, 'Nguyễn Thanh Vinh', '0189766546', 2, 'Quận Bình Thạch Hồ Chí Minh Việt nam', 0, 'thanhvinh@gmail.com', '2016-05-05 08:43:36'),
 (82, 5, 'Nguyễn Thanh Vinh', '0189766546', 7, 'Quận Bình Thạch Hồ Chí Minh Việt nam', 0, 'thanhvinh@gmail.com', '2016-05-05 08:44:40');
 
@@ -229,21 +228,25 @@ CREATE TABLE IF NOT EXISTS `users` (
   `sodienthoai` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `diachi` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `remember_token` varchar(100) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `role`  varchar(100) COLLATE utf8_unicode_ci NOT NULL,
+  `role` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `sodienthoai`, `diachi`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Võ Tiến Thiều', 'votienthieu@gmail.com', '$2y$10$x2kiPmVCAex/DS79O5rPO.bIBsQV.pnQIzXno9cnKzh8fTqZxQgo.', '01692566179', 'KTX Bách Khoa Hồ Chí Minh, 497 Hoà Hảo, Quận 10', '8YoTVJLDUNXlKliDAyJCrADTJ4QAiW8XFywqPFpkZChazlaEflRppKPAzv76', NULL, NULL),
-(2, 'Thiều Đẹp Trai', 'votienthieu123@gmail.com', '$2y$10$ehSCx2c7NhVdd2wyc9lOsuL4dP7MAS69EqbLX9LmqPiRE5ZfVToB2', '', '', 'drltnLW6WdnQVr26RSfrBPrKlbZVivxw5ptvFpLV1xcgEA26nkT3b1Q1fPwt', NULL, NULL),
-(3, 'Làm mà chán quá', 'aaa123@gmail.com', '$2y$10$ZowT1xEipDqID8oHiVtqtegLb574aao8bEDYflcNFjswkhRbZGe3y', '', '', '4NC5iczagaSCgskOF75k4DkE2A9woyFBAB3UY6GK1ar7zniXQNH3gRagoN9u', NULL, NULL),
-(4, 'Thế Trần', 'the@gmail.com', '$2y$10$NzJi/quyZlyjmwzxPeeusO9t.apOgxsfebGMU304cNsu9eQ9fE0QO', '', '', 'Ox5DDoVintF03n5ITHUUYr7yZUfrMY9sOvfhAAEaCEUfmCLNewNPZMU7MSOL', NULL, NULL),
-(5, 'Nguyễn Thanh Vinh', 'thanhvinh@gmail.com', '$2y$10$RcExi9orllzUpIqC52hrEOYJv9XYEV7yiiTYcfaHpXUukVA.saR5O', '0189766546', 'Quận Bình Thạch Hồ Chí Minh Việt nam', NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `sodienthoai`, `diachi`, `remember_token`, `role`, `created_at`, `updated_at`) VALUES
+(1, 'Võ Tiến Thiều', 'votienthieu@gmail.com', '$2y$10$x2kiPmVCAex/DS79O5rPO.bIBsQV.pnQIzXno9cnKzh8fTqZxQgo.', '01692566179', 'KTX Bách Khoa Hồ Chí Minh, 497 Hoà Hảo, Quận 10', 'A4nnEMkgYRaAFhrRgoXP3Vpkn7bTlHKdWFmV7n46dzXp0VWcefLNoIBAMYx2', 'admin', '2016-04-30 17:00:00', NULL),
+(4, 'Thế Trần', 'the@gmail.com', '$2y$10$NzJi/quyZlyjmwzxPeeusO9t.apOgxsfebGMU304cNsu9eQ9fE0QO', '', '', 'Ox5DDoVintF03n5ITHUUYr7yZUfrMY9sOvfhAAEaCEUfmCLNewNPZMU7MSOL', 'admin', '2016-05-02 17:00:00', NULL),
+(5, 'Nguyễn Thanh Vinh', 'thanhvinh@gmail.com', '$2y$10$RcExi9orllzUpIqC52hrEOYJv9XYEV7yiiTYcfaHpXUukVA.saR5O', '0189766546', 'Quận Bình Thạch Hồ Chí Minh Việt nam', NULL, 'user', '2016-05-04 17:00:00', NULL),
+(17, 'Nguyễn Quanh Vinh', 'nguyenquangvinh@gmail.com', '$2y$10$OrfVbWSHJd18vtItY6a64.qe9QunD3E5h7qwSE/pV7Ac3GUB583fK', '', '', '86Ub0Epl0ltiAUlQ6C3XHYc6iJrKa9CSn91HkVzkqZoNuEF24DxQTVB9h7pL', 'user', '2016-05-03 17:00:00', NULL),
+(18, 'Nguyễn Thế Vinh', 'nguyenthevinh@gmail.com', '$2y$10$34L3S54Nmyo6kDZDilkG5enGbWJrsO72S5btQo2SxoJQ5Qm7nUNVu', '', '', 'I1DhuFjO6H55vbWpLnncXCcte1y2GpHrZsbFTXeclabF0786ugWo8sJMMRZC', 'user', '2016-05-01 17:00:00', NULL),
+(19, 'Nguyễn Văn Quốc', 'nguyenvanquoc@gmail.com', '$2y$10$rYOOSzb2oKiL8hRQCy9WG.NYWNHkeqrV97oUXX16PLE.hrqA3tsq6', '', '', 'UBq3J3hP1wbySlzLyiYSKa9rlPEXDd4huIcu8hNmuqDl2NtCpDmOTggB4ltc', 'user', '2016-05-01 17:00:00', NULL),
+(20, 'Võ Tắc Thiên', 'votacthien@gmail.com', '$2y$10$vhP9IWXt8w2awq3sMZqyceolPIYMusg0030TdNrXVxNXPGT6BJkb.', '', '', 'oD8OuOUA8n0Ur1wRp31DpGgBFSe38wIjTpfoSyGiME6wXFbCE2zXVjowmO81', 'user', '2016-05-01 17:00:00', NULL),
+(21, 'Mercedes', 'votien.thieu@gmail.com', '$2y$10$Tr3xiH0Siz5dXIVc4.Cww.ccnbHzw6fdBgYEipgNsJ.i6CFXzPqRS', '', '', 'iyk7sqoOXyGWIrmw6vuWfLZxSxqpWgw2CJQaF8K59E0TXzwmudqqGtJOyaJ7', 'user', '0000-00-00 00:00:00', NULL),
+(22, 'Tào Tháo', 'taothaoruot@luubi.com', '$2y$10$4bUUehZ9X6R3BQTmIKDfRuKR4jYXMKk4wMOREKCodBvEW8VSN/Q/W', '', '', 'BVZjPGEYeWnYtN7sVPpaFWArqM36k6vgIaJJrq1DoJU8hMOD4VaWgZ9T1QCr', 'user', '2016-05-06 10:05:26', NULL);
 
 --
 -- Indexes for dumped tables
@@ -304,7 +307,7 @@ ALTER TABLE `bai_viet`
 -- AUTO_INCREMENT for table `binh_luan`
 --
 ALTER TABLE `binh_luan`
-  MODIFY `idBinhLuan` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `idBinhLuan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `danh_muc`
 --
@@ -324,7 +327,7 @@ ALTER TABLE `giao_dich`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
+  MODIFY `id` int(10) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=23;
 --
 -- Constraints for dumped tables
 --
