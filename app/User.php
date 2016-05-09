@@ -12,7 +12,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'role', 'created_at'
     ];
 
     /**
@@ -29,4 +29,31 @@ class User extends Authenticatable
      * @var bool
      */
     public $timestamps = false;
+
+     public function isAdmin(){
+      if ($this->role == "admin") {
+        return true;
+      }
+      return false;
+    }
+
+    public function getOrder(){
+        return User::hasMany('App\Order', 'idUser', 'id');
+    }
+
+    public function getAllUser(){
+        return User::where('role', 'user')->get();
+    }
+
+    public function getUserInfoById($userId){
+        return User::where('id', $userId)->first();
+    }
+
+    public function deleteUser($userId){
+        if($this->getUserInfoById($userId)->getOrder->count() > 0)
+            return false;
+        else
+            User::destroy($userId);
+        return true;
+    }
 }

@@ -21,4 +21,12 @@ class Order extends Model
     	return Order::orderBy('trangThaiThanhToan')->orderBy('ngayTao', 'DESC')->where('idUser', $userId)->get();
     }
 
+    public function getOrderByStatus($status){
+        return Order::where('trangThaiThanhToan', $status)->orderBy('ngayTao', 'DESC')->get();
+    }
+
+    public function getUser(){
+        return Order::belongsTo('App\User', 'idUser', 'id');
+    }
+
 }

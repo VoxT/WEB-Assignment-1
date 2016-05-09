@@ -69,7 +69,7 @@
 						<a href="{{ url('order/pid='.$product->idDienThoai)}}" class="btn btn-blue btn-block btn-proceed-order" role="button" ><i class="fa fa-shopping-cart"></i>   MUA NGAY</a>
 					</div>
 					<div class="col-sm-5">
-						<a href="#buy" class="btn btn-blue btn-block btn-proceed-order tragop" role="button" ><i class="fa fa-shopping-cart"></i>   MUA TRẢ GÓP</a>
+						<a href="{{ url('order/muatragop/pid='.$product->idDienThoai)}}" class="btn btn-blue btn-block btn-proceed-order tragop" role="button" ><i class="fa fa-shopping-cart"></i>   MUA TRẢ GÓP</a>
 					</div>
 				</div>
 			</div>
@@ -127,57 +127,54 @@
 				<div class="row">
 					<div class="col-md-8  col-sm 12">
 						<div class="response-area">
-							<h2>3 Comments</h2>
+							<h2>Comments</h2>
 							<div class="input-group"> 
-			                    <input class="form-control comment-box" placeholder="Add a comment" type="text">
+			                    <input id="data" class="form-control comment-box" placeholder="Add a comment" type="text">
 			                    <span class="input-group-addon">
-			                        <a href="#"><i class="fa fa-edit"></i></a>  
+			                        <button onclick="addComment()" class="btn-block"><i class="fa fa-edit"></i></button>  
+									<input id="comment_id" type="hidden" value=""></input>
 			                    </span>
 			                </div>
 							<ul class="media-list">
-								<li class="media">
-									
-									<a class="pull-left" href="#">
-										<img class="media-object" src="{{ asset('public/images/user.jpg') }}" alt="">
-									</a>
-									<div class="media-body">
-										<ul class="sinlge-post-meta">
-											<li><i class="fa fa-user"></i>Janis Gallagher</li>
-											<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-											<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-										</ul>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-										<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-									</div>
-								</li>
-								<li class="media second-media">
-									<a class="pull-left" href="#">
-										<img class="media-object" src="{{ asset('public/images/user.jpg') }}" alt="">
-									</a>
-									<div class="media-body">
-										<ul class="sinlge-post-meta">
-											<li><i class="fa fa-user"></i>Janis Gallagher</li>
-											<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-											<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
-										</ul>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-										<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
-									</div>
-								</li>
+							@foreach($product->getComment as $data)
+								@if(!isset($data->idBinhLuanCha))
 								<li class="media">
 									<a class="pull-left" href="#">
 										<img class="media-object" src="{{ asset('public/images/user.jpg') }}" alt="">
 									</a>
 									<div class="media-body">
 										<ul class="sinlge-post-meta">
-											<li><i class="fa fa-user"></i>Janis Gallagher</li>
-											<li><i class="fa fa-clock-o"></i> 1:33 pm</li>
-											<li><i class="fa fa-calendar"></i> DEC 5, 2013</li>
+											<li><i class="fa fa-user"></i>{{ $data->getUser->name}}</li>
+											<li><i class="fa fa-clock-o"></i>{{ date('H:m', strtotime($data->thoiGian))}}</li>
+											<li><i class="fa fa-calendar"></i> {{ date('d-m-Y', strtotime($data->thoiGian))}}</li>
 										</ul>
-										<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.  Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-										<a class="btn btn-primary" href=""><i class="fa fa-reply"></i>Replay</a>
+										<p>{{$data->noiDung}}</p>
+										<a class="btn btn-primary" href="" onclick="addComment()"><i class="fa fa-reply"></i>Replay</a>
+										<input id="comment_idChild" type="hidden" value="{{$data->idBinhLuan}}"></input>
 									</div>
 								</li>
+								@endif
+								@if($data->getChildComment->count() > 0)
+									@foreach($data->getChildComment as $data)
+										<li class="media second-media">
+											<a class="pull-left" href="#">
+												<img class="media-object" src="{{ asset('public/images/user.jpg') }}" alt="">
+											</a>
+											<div class="media-body">
+												<ul class="sinlge-post-meta">
+													<li><i class="fa fa-user"></i>{{ $data->getUser->name}}</li>
+													<li><i class="fa fa-clock-o"></i>{{ date('H:m', strtotime($data->thoiGian))}}</li>
+													<li><i class="fa fa-calendar"></i> {{ date('d-m-Y', strtotime($data->thoiGian))}}</li>
+												</ul>
+												<p>{{$data->noiDung}}</p>
+												<a class="btn btn-primary" href="" onclick="addComment()"><i class="fa fa-reply"></i>Replay</a>
+												<input id="comment_idChild" type="hidden" value="{{$data->idBinhLuan}}"></input>
+
+											</div>
+										</li>
+									@endforeach
+								@endif
+							@endforeach
 							</ul>					
 						</div>
 					</div>
@@ -187,7 +184,6 @@
 				</div>
 			</div>
 		</div>
-
 	</div>
 
 @stop

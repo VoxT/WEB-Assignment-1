@@ -18,6 +18,8 @@ use App\Order;
 
 use Auth;
 
+use App\Comment;
+
 class PagesController extends Controller
 {
 
@@ -29,6 +31,7 @@ class PagesController extends Controller
     protected $products;
     protected $category;
     protected $order;
+    protected $comments;
 
     /**
      * Create a new controller instance.
@@ -36,11 +39,12 @@ class PagesController extends Controller
      * @param  ProductRepository  $products
      * @return void
      */
-    public function __construct(Products $products, Category $category, Order $order)
+    public function __construct(Products $products, Category $category, Order $order, Comment $comments)
     {
         $this->products = $products;
         $this->category = $category;
         $this->order = $order;
+        $this->comments = $comments;
     }
 
   /**
@@ -90,7 +94,6 @@ class PagesController extends Controller
    public function showCategoryProducts($categoryId){
       return view('page.home', [
           'products' => $this->products->getProductByCategory($categoryId), 
-          'category' => $this->category->getAllCategory(),
           'title' => $this->category->getCategoryNameById($categoryId)
         ]);
    }
@@ -98,7 +101,6 @@ class PagesController extends Controller
    public function showProductsByBand($categoryId){
       return view('page.band', [
           'band' => $this->category->getSubCategoryById($categoryId), 
-          'category' => $this->category->getAllCategory(),
           'title' => $this->category->getCategoryNameById($categoryId)
         ]);
    }
@@ -109,4 +111,37 @@ class PagesController extends Controller
           'orders' => $this->order->getOrderByUser(Auth::user()->id)
         ]);
    }
+
+   public function muatragop(){
+      return view('page.tragop');
+   }
+
+   public function search(Request $request) {
+      return view('page.search', [
+        'title' => 'Kết Quả Tìm Kiếm '.$request->keyword,
+        'products' => Product::where('ten', 'LIKE', '%'.$request->keyword.'%')->get()
+   ]);
+  }
+
+  public function hotproduct(){
+      return view('page.home', [
+            'products' => $this->products->getHotProduct(),
+            'title' => 'Sản Phẩm Bán Chạy'
+        ]);
+  }
+
+
+  public function insertComment(){
+
+      $id = Comment::insertGetId([
+            'idDienThoai' => $request->input('idDT'),
+            'idUser' => $request->input('idUser'),
+            'idBinhLuanCha' => $request->input('idCha'),
+            'noiDung' => $request->input('comment'),
+            'thoiGian' => timestamps()
+        ]);
+
+     return Response::json($this->comments->getCommentById($id));
+
+  }
 }

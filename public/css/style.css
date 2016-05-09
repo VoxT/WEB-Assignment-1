@@ -516,3 +516,12 @@ a {
   width: 100%;
   object-fit: cover;
 }
+.modal-dialog{
+  width: 70%;
+}
+
+@media (max-width: 767px) {
+  .modal-dialog{
+    width: 100%;
+  }
+}

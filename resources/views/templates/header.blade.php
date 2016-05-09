@@ -37,18 +37,23 @@
                     </div>
                     <div class="col-sm-3 col-xs-12">
                         <div class="search_box">
-                            <input type="text" placeholder="Tìm Kiếm">
+                        <form action="{{url('search')}}">
+                            <input type="text" placeholder="Tìm Kiếm" name="keyword">
+                        </form>
                         </div>
                     @if (Auth::guest())
                         <a href="{{ url('/login') }}"><i class="fa fa-lock"> </i> Đăng Nhập</a>
                     @else  
                         <div class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                                {{ Auth::user()->name }} <span class="caret"></span>
+                                {{ Auth::user()->name }} @if(Auth::user()->isAdmin()) ( admin ) @endif<span class="caret"></span>
                             </a>
 
                             <ul class="dropdown-menu">
                                 <li><a class="dropdown-link" href="{{ url('/userinfo') }}"><i class="fa fa-info-circle" aria-hidden="true"></i> Thông tin cá nhân</a></li>
+                                @if(Auth::user()->isAdmin())
+                                <li><a class="dropdown-link" href="{{ url('/manager') }}"><i class="fa fa-tachometer" aria-hidden="true"></i> Quản Trị Trang</a></li>
+                                @endif
                                 <li><a class="dropdown-link" href="{{ url('/logout') }}"><i class="fa fa-btn fa-sign-out"></i>Đăng xuất</a></li>
                             </ul>
                         </div>
@@ -71,9 +76,9 @@
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
                         <li class="{{ Request::segment(1) === 'home' ? 'active' : null }}"><a href="{{ url('home') }}">Trang Chủ</a></li>
-                        <li class="{{ Request::segment(1) === 'hotProducts' ? 'active' : null }}"><a href="#follow">Sản Phẩm Hot</a></li>
-                        <li class="{{ Request::segment(1) === 'tragop' ? 'active' : null }}"><a href="{{ url('tragop') }}">Trả Góp</a></li>
+                        <li class="{{ Request::segment(1) === 'hotProducts' ? 'active' : null }}"><a href="{{ url('hotproduct') }}">Sản Phẩm Hot</a></li>
                         <li class="{{ Request::segment(1) === 'khuyenmai' ? 'active' : null }}"><a href="#follow">Khuyến Mãi</a></li>
+                        <li class="{{ Request::segment(1) === 'tragop' ? 'active' : null }}"><a href="{{ url('tragop') }}">Trả Góp</a></li>
                         <li class="{{ Request::segment(1) === 'service' ? 'active' : null }}"><a href="#contact">Dịch Vụ</a></li>
                         <li class="{{ Request::segment(1) === 'news' ? 'active' : null }}"><a href="#contact">Tin Tức</a></li>
                         <li class="{{ Request::segment(1) === 'humanresource' ? 'active' : null }}"><a href="#contact">Tuyển Dụng</a></li>

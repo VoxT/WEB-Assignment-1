@@ -6,7 +6,7 @@
 			<div class="row">
 				<div class="col-sm-5 col-sm-offset-1">
                     <div class="product-information">
-                        <a href="">
+                        <a href="{{ url('product/'.$product->idDienThoai)}}">
 	                        <img src="{{ asset($product->linkAnhDaiDien) }}" alt="{{$product->ten}}">
 	                        <h2>{{$product->ten}}</h2>
 	                    </a>

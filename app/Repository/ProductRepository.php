@@ -19,5 +19,17 @@ class ProductRepository{
   public function getProductByCategory($categoryId){
     return Product::where('idDanhMuc', $categoryId)->get();
   }
+
+  public function getHotProduct(){
+      return $product = Product::get()->sortBy(function($product)
+      {
+          return $product->getOrder->count();
+      });
+  }
+
+  public function getNewProduct(){
+    return Product::where('ngayTao', '>', date('Y/m/d H:m:s', strtotime('48 hours ago')))->get();
+  }
+
 }
 ?>

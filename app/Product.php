@@ -12,4 +12,12 @@ class Product extends Model
       return $this->belongsTo('App\Category', 'IdDanhMuc', 'idDanhMuc');
     }
 
+    public function getOrder(){
+    	return $this->hasMany('App\Order', 'idDienThoai', 'idDienThoai');
+    }
+
+    public function getComment(){
+    	return $this->hasMany('App\Comment', 'idDienThoai', 'idDienThoai');
+    }
+
 }

@@ -121,7 +121,7 @@
 					</td>
 					<td class="cart_description">
 						<h4><a href="{{ url('product/'.$order->getProduct->idDienThoai) }}">{{$order->getProduct->ten}}</a></h4><br/>
-						<p>Số Điện Thoại: {{ $order->number }}</p>
+						<p>Số Điện Thoại: {{ $order->sdtNguoiMua }}</p>
 						<p> Địa Chỉ Giao: {{ $order->diachi }}</p>
 					</td>
 					<td class="cart_price">

@@ -1,28 +1,55 @@
 @extends('templates.master')
  
 @section('content')
-
 	<div class="container">
+		@if(Request::segment(1) != 'home')
+		<div class="breadcrumbs">
+			<ol class="breadcrumb">
+			  <li><a href="{{url('/home')}}">Home</a></li>
+			  <li class="active">{{$title}}</li>
+			</ol>
+		</div>
+		@endif
 		<div class="row">
-			@include('templates.sidebar')
-			
-			<div class="col-sm-9 padding-right">
+			@if(isset($category))
+				@include('templates.sidebar')
+				<div class="col-sm-9 padding-right">
+			@else
+				<div class="col-sm-12">
+			@endif		
 					<div class="features_items"><!--features_items-->
 						<h2 class="title text-center">{{ $title }}</h2>
 
+					@if($products->count() > 0)
 						@foreach($products as $product)
-						<div class="col-sm-4">
-							<div class="product-image-wrapper">
-								<div class="single-products">
+							@if(isset($category))
+								<div class="col-sm-4">
+							@else
+								<div class="col-sm-3">
+							@endif	
+								<div class="product-image-wrapper">
+									<div class="single-products">
 										<div class="productinfo text-center">
 											<img src="{{ asset( $product->linkAnhDaiDien )}}" alt="{{ $product->ten }}" />
+											@if($product->giamGia > 0)
+											<p style="margin-bottom: -20px; text-decoration: line-through;">{{ $product->gia }}</p>
+											<h2>{{ substr_replace(
+												substr_replace( strval(intval($product->gia*1000000) - intval($product->gia*1000000)*$product->giamGia/100), '.', -3,0), '.', -7, 0) }}</h2>
+											@else
 											<h2>{{ $product->gia }}</h2>
+											@endif
 											<p>{{ $product->ten }}</p>
 											<a href="{{ url('product/p-'.$product->idDienThoai) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
 										</div>
 										<div class="product-overlay">
 											<div class="overlay-content">
+												@if($product->giamGia > 0)
+												<p style="margin-bottom: -20px; text-decoration: line-through;">{{ $product->gia }}</p>
+												<h2>{{ substr_replace(
+												substr_replace( strval(intval($product->gia*1000000) - intval($product->gia*1000000)*$product->giamGia/100), '.', -3,0), '.', -7, 0) }}</h2>
+												@else
 												<h2>{{ $product->gia }}</h2>
+												@endif
 												<p>{{ $product->ten }}</p>
 												<a href="{{ url('product/'.$product->idDienThoai) }}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Mua Ngay</a>
 											</div>
@@ -37,112 +64,22 @@
 								</div>
 								<div class="choose">
 									<ul class="nav nav-pills nav-justified">
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to wishlist</a></li>
-										<li><a href="#"><i class="fa fa-plus-square"></i>Add to compare</a></li>
+										<li><a href="{{ url('product/'.$product->idDienThoai) }}">
+												<i class="fa fa-cart-plus" aria-hidden="true"></i>{{$product->getOrder->count()}} Đã Mua</a></li>
+										<li><a href="{{ url('product/'.$product->idDienThoai) }}">
+												<i class="fa fa-mobile" aria-hidden="true"></i> {{$product->soLuong - $product->getOrder->count()}} Còn Lại</a></li>
 									</ul>
 								</div>
 							</div>
 						</div>
 						@endforeach
-						
+					@else
+						<div class="single-products text-center">
+							<img src="{{ asset('public/images/empty.jpg') }}">
+						</div>
+					@endif
 					</div><!--features_items-->
 					
-					<div class="recommended_items"><!--recommended_items-->
-						<h2 class="title text-center">recommended items</h2>
-						
-						<div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
-							<div class="carousel-inner">
-								<div class="item active">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-								<div class="item">	
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend1.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend2.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="product-image-wrapper">
-											<div class="single-products">
-												<div class="productinfo text-center">
-													<img src="images/home/recommend3.jpg" alt="" />
-													<h2>$56</h2>
-													<p>Easy Polo Black Edition</p>
-													<a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-												</div>
-												
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							 <a class="left recommended-item-control" href="#recommended-item-carousel" data-slide="prev">
-								<i class="fa fa-angle-left"></i>
-							  </a>
-							  <a class="right recommended-item-control" href="#recommended-item-carousel" data-slide="next">
-								<i class="fa fa-angle-right"></i>
-							  </a>			
-						</div>
-					</div><!--/recommended_items-->
 					
 			</div>
 

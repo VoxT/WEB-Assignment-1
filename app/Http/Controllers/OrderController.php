@@ -78,4 +78,11 @@ class OrderController extends Controller
                 'order' => $this->orders->getOrderById($orderId)
             ]);
     }
+
+
+    public function muatragop($productId){
+        return view('page.tragop', [
+                'product' => $this->products->getProductBy($productId)
+            ]);
+    }
 }
