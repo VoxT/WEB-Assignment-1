@@ -28,7 +28,7 @@ class ProductRepository{
   }
 
   public function getNewProduct(){
-    return Product::where('ngayTao', '>', date('Y/m/d H:m:s', strtotime('48 hours ago')))->get();
+    return Product::where('ngayTao', '>', date('Y/m/d H:m:s', strtotime('7 days ago')))->get();
   }
 
 }

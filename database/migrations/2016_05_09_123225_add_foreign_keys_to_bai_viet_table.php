@@ -14,7 +14,7 @@ class AddForeignKeysToBaiVietTable extends Migration {
 	{
 		Schema::table('bai_viet', function(Blueprint $table)
 		{
-			$table->foreign('idAdmin', 'bai_viet_ibfk_1')->references('idAdmin')->on('admin')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('id', 'bai_viet_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

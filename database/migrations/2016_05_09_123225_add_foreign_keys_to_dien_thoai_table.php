@@ -14,7 +14,7 @@ class AddForeignKeysToDienThoaiTable extends Migration {
 	{
 		Schema::table('dien_thoai', function(Blueprint $table)
 		{
-			$table->foreign('idAdmin', 'dien_thoai_ibfk_1')->references('idAdmin')->on('admin')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('id', 'dien_thoai_ibfk_1')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('IdDanhMuc', 'dien_thoai_ibfk_2')->references('idDanhMuc')->on('danh_muc')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}

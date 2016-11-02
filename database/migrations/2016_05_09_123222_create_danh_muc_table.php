@@ -14,9 +14,9 @@ class CreateDanhMucTable extends Migration {
 	{
 		Schema::create('danh_muc', function(Blueprint $table)
 		{
-			$table->integer('idDanhMuc')->primary();
-			$table->integer('tenLoaiDienThoai');
-			$table->integer('idDanhMucCha')->index('idDanhMucCha');
+			$table->integer('idDanhMuc', true);
+			$table->string('tenLoaiDienThoai', 30);
+			$table->integer('idDanhMucCha')->nullable()->index('idDanhMucCha');
 		});
 	}
 

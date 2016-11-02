@@ -21,6 +21,7 @@ class CreateUsersTable extends Migration {
 			$table->string('sodienthoai');
 			$table->string('diachi');
 			$table->string('remember_token', 100)->nullable();
+			$table->string('role', 100);
 			$table->timestamps();
 		});
 	}

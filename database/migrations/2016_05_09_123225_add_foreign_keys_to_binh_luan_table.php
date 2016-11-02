@@ -18,7 +18,7 @@ class AddForeignKeysToBinhLuanTable extends Migration {
 			$table->foreign('idBaiViet', 'binh_luan_ibfk_2')->references('idBaiViet')->on('bai_viet')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('idUser', 'binh_luan_ibfk_3')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 			$table->foreign('idBinhLuanCha', 'binh_luan_ibfk_4')->references('idBinhLuan')->on('binh_luan')->onUpdate('RESTRICT')->onDelete('RESTRICT');
-			$table->foreign('idAdmin', 'binh_luan_ibfk_5')->references('idAdmin')->on('admin')->onUpdate('RESTRICT')->onDelete('RESTRICT');
+			$table->foreign('id', 'binh_luan_ibfk_5')->references('id')->on('users')->onUpdate('RESTRICT')->onDelete('RESTRICT');
 		});
 	}
 

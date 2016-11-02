@@ -14,14 +14,14 @@ class CreateBinhLuanTable extends Migration {
 	{
 		Schema::create('binh_luan', function(Blueprint $table)
 		{
-			$table->integer('idBinhLuan')->primary();
+			$table->integer('idBinhLuan', true);
 			$table->integer('idDienThoai')->nullable()->index('idDienThoai');
 			$table->integer('idUser');
 			$table->integer('idBaiViet')->nullable()->index('idBaiViet');
-			$table->integer('idBinhLuanCha')->index('idBinhLuanCha');
+			$table->integer('idBinhLuanCha')->nullable()->index('idBinhLuanCha');
 			$table->text('noiDung', 65535);
-			$table->integer('thoiGian');
-			$table->integer('idAdmin')->index('idAdmin');
+			$table->timestamp('thoiGian')->default(DB::raw('CURRENT_TIMESTAMP'));
+			$table->integer('id')->nullable()->index('id');
 			$table->index(['idUser','idBaiViet','idBinhLuanCha'], 'idUser');
 		});
 	}

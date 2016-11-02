@@ -57,7 +57,7 @@
 										@if($product->giamGia > 0)
 										<img src="{{ asset('public/images/sale.png') }}" class="new" alt="">
 										@else
-										@if( (strtotime($product->ngayTao) - strtotime(time())) > strtotime('24 hours ago') )
+										@if( (strtotime($product->ngayTao) - strtotime(time())) > strtotime('7 days ago') )
 										<img src="{{ asset('public/images/new.png') }}" class="new" alt="">
 										@endif
 										@endif

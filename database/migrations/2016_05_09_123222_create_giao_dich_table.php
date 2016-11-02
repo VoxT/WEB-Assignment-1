@@ -14,13 +14,15 @@ class CreateGiaoDichTable extends Migration {
 	{
 		Schema::create('giao_dich', function(Blueprint $table)
 		{
-			$table->integer('idGiaoDich')->primary();
+			$table->integer('idGiaoDich', true);
 			$table->integer('idUser')->nullable();
 			$table->string('tenNguoiMua', 30);
 			$table->string('sdtNguoiMua', 20);
 			$table->integer('idDienThoai')->index('idDienThoai');
-			$table->string('noiDungThanhToan', 80);
-			$table->integer('cachThanhToan');
+			$table->string('diachi', 80);
+			$table->integer('trangThaiThanhToan');
+			$table->string('email', 30);
+			$table->timestamp('ngayTao')->default(DB::raw('CURRENT_TIMESTAMP'));
 			$table->index(['idUser','idDienThoai'], 'idUser');
 		});
 	}

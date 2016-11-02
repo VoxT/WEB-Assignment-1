@@ -131,17 +131,17 @@ class PagesController extends Controller
   }
 
 
-  public function insertComment(){
+  public function insertComment($request){
 
       $id = Comment::insertGetId([
-            'idDienThoai' => $request->input('idDT'),
-            'idUser' => $request->input('idUser'),
-            'idBinhLuanCha' => $request->input('idCha'),
-            'noiDung' => $request->input('comment'),
+            'idDienThoai' => $request->idDienThoai,
+            'idUser' => $request->idUser,
+            'idBinhLuanCha' => $request->idBinhLuanCha,
+            'noiDung' => $request->noiDung,
             'thoiGian' => timestamps()
         ]);
 
-     return Response::json($this->comments->getCommentById($id));
+     return productInfo($request->idDienThoai);
 
   }
 }
